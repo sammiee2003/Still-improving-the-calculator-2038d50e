@@ -1,82 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>kaas calculator</title>
+ 
 </head>
+
 <body>
-<h1>Caluclator</h1>
-<?php
-$result = "";
-class calculator
-{
-    var $a;
-    var $b;
-    function checkopration($oprator)
-    {
-        switch($oprator)
-        {
-            case '+':
-                return $this->a + $this->b;
-                break;
-            case '-':
-                return $this->a - $this->b;
-                break;
-            case '*':
-                return $this->a * $this->b;
-                break;
-            case '/':
-                return $this->a / $this->b;
-                break;
-            default:
-                return "Kies een nieuw getal uit!";
+    <?php
+    if (isset($_POST["submit"])) {
+        if (!empty($_POST["first-number"]) && !empty(["first-number"])) {
+            $firstNumber = $_POST["first-number"];
+            $secondNumber = $_POST["second-number"];
+            $submit = $_POST["submit"];
+            $result = "";
+            switch ($submit) {
+                case "Add":
+                    $result = $firstNumber + $secondNumber;
+                    break;
+                case "Subtract":
+                    $result = $firstNumber - $secondNumber;
+                    break;
+                case "Multiply":
+                    $result = $firstNumber * $secondNumber;
+                    break;
+                case "Divide":
+                    $result = round($firstNumber / $secondNumber, 2);
+                    break;
+                case "Modulo":
+                    $result = $firstNumber % $secondNumber;
+                    break;
+                default:
+                    $result = "error";
+                    break;
+            }
+        } else {
+            echo "Er is iets fout gegaan!" . PHP_EOL;
         }
     }
-    function getresult($a, $b, $c)
-    {
-        $this->a = $a;
-        $this->b = $b;
-        return $this->checkopration($c);
-    }
-}
-$cal = new calculator();
-if(isset($_POST['submit']))
-{
-    $result = $cal->getresult($_POST['n1'],$_POST['n2'],$_POST['op']);
-}
-?>
-
-<form method="post">
-    <table align="center">
-        <tr>
-            <td><strong><?php echo $result; ?><strong></td>
-        </tr>
-        <tr>
-            <td><input type="text" name="n1"></td>
-            <td>eerste getal</td>
-        </tr>
-
-        <tr>
-            <td><input type="text" name="n2"></td>
-            <td>tweede getal</td>
-        </tr>
-
-        <tr>
-            <td>Kies uit:</td>
-            <td><select name="op">
-                    <option value="+">+</option>
-                    <option value="-">-</option>
-                    <option value=""></option>
-                    <option value="/">/</option>
-                </select></td>
-        </tr>
-
-        <tr>
-            <td></td>
-            <td><input type="submit" name="submit" value="="></td>
-        </tr>
-
-    </table>
-</form>
+    ?>
+        <h1>Calculator</h1>
+        <form method="post" class="form">
+            <div>
+                <input type="number" name="first-number" min=".00" step=".00" required>
+                <label for="firstnumber" class="label">First Number</label>
+            </div>
+            <div>
+                <input type="number" name="second-number" min=".00" step=".00 required>
+                <label for=" second-number" class="label">Second Number</label>
+            </div>
+            <div>
+                <input type="submit" name="submit" value="Add">
+                <input type="submit" name="submit" value="Subtract">
+                <input type="submit" name="submit" value="Multiply">
+                <input type="submit" name="submit" value="Divide">
+                <input type="submit" name="submit" value="Modulo">
+            </div>
+        </form>
+        <h2>
+            Uw uitkomst: <?php if (isset($result)) {
+                            echo $result;
+                         } ?>
+        </h2>
 </body>
+
 </html>
