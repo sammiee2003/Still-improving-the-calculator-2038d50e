@@ -8,32 +8,34 @@
 <body>
     <?php 
     $result = "";
-    class calculator { 
-       var $a;
-       var $b; 
-       function checkoparation($oparator) {
-           switch($oparator) {
+    class cal 
+    { 
+        var $a;
+        var $b; 
+        function checkoparation($oparator) 
+        {
+            switch($oparator) {
                 case "+":
-                    return $this->a + $this->b;
-                    break;
+                return $this->a + $this->b;
+                break;
                 case "-":
-                    return $this->a - $this->b;
-                    break;
+                return $this->a - $this->b;
+                break;
                 case "*":
-                    return $this->a * $this->b;
-                    break;
+                return $this->a * $this->b;
+                break;
                 case "/":
-                    return $this->a / $this->b;
-                    break;
+                return $this->a / $this->b;
+                break;
                 default:
-                    return "kies en nieuw getal uit";
-           }
-       }
-       function getresult($a, $b, $c) {
-           $this->a = $a;
-           $this->b = $b;
-           return $this->checkoparation($c);
-       }
+                return "kies en nieuw getal uit";
+            }
+        }
+        function getresult($a, $b, $c) {
+            $this->a = $a;
+            $this->b = $b;
+            return $this->checkoparation($c);
+        }
     }
     $cal = new calculator();
     if (isset($_POST["submit"])) {
